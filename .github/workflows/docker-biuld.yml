@@ -32,5 +32,5 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          xy2yp/dangbei2api:latest
-          xy2yp/dangbei2api:${{ github.sha }}
+          jiongjiong/dangbei2api:latest
+          jiongjiong/dangbei2api:${{ github.sha }}

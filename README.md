@@ -42,7 +42,7 @@ LOG_LEVEL=DEBUG
 **2.支持Docker部署，可直接使用 Docker 命令**
 
 ```bash
-docker run -d -p 8000:8000 -e API_KEY=sk-DangBei666 -e MAX_CHARS=99999  -eENABLE_CORS=True -e LOG_LEVEL=INFO --name dangbei2api xy2yp/dangbei2api:latest
+docker run -d -p 8000:8000 -e API_KEY=sk-DangBei666 -e MAX_CHARS=99999  -eENABLE_CORS=True -e LOG_LEVEL=INFO --name dangbei2api jiongjiong/dangbei2api:latest
 ```
 
 # 更新历史
