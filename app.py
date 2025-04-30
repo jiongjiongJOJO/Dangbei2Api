@@ -115,12 +115,25 @@ def generate_sign(timestamp: str, payload: dict, nonce: str) -> str:
 
 
 # 创建会话
-async def create_conversation(device_id: str) -> str:
-    payload = {"botCode": "AI_SEARCH"}
-    timestamp = str(int(time.time()))
+async def create_conversation(device_id: str, model_name) -> str:
+    payload = {
+        "metaData": {
+            "writeCode": "",
+            "chatModelConfig": {
+                "model": model_to_user_action[model_name]['model'],
+                "options": model_to_user_action[model_name]['user_action'],
+            }
+        },
+        "isAnonymous": False
+    }
+    timestamp = str(int(time.time()) - 20)
     nonce = nanoid(21)
     sign = generate_sign(timestamp, payload, nonce)
     headers = {
+        "appType": "6",
+        "client-ver": "1.0.1",
+        "lang": "zh",
+        "token": "",
         "Origin": "https://ai.dangbei.com",
         "Referer": "https://ai.dangbei.com/",
         "User-Agent": get_user_agent(device_id),
@@ -267,12 +280,20 @@ def prepare_request_payload(request: ChatCompletionRequest, device_id: str, conv
     user_action = model_to_user_action.get(request.model, {}).get('user_action', [])
     model = model_to_user_action.get(request.model, {}).get("model", "deepseek")
     payload = {
+        "role": "user",
         "stream": True,
         "botCode": "AI_SEARCH",
         "userAction": ",".join(user_action),
         "model": model,
         "conversationId": conversation_id,
         "question": concatenated_message,
+        "anonymousKey": "",
+        "chatOption": {
+            "writeCode": None, "searchKnowledge": False
+        },
+        "files": [],
+        "status": "local",
+        "agentId": "",
     }
     timestamp = str(int(time.time()))
     nonce = nanoid(21)
@@ -367,7 +388,7 @@ async def chat_completions(request: ChatCompletionRequest, _: None = Depends(che
 
     device_id = generate_device_id()
     print(f"device_id: {device_id}")
-    conversation_id = await create_conversation(device_id)
+    conversation_id = await create_conversation(device_id, request.model)
 
     if request.stream:
         return StreamingResponse(stream_response(request, device_id, conversation_id), media_type="text/event-stream")
