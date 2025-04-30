@@ -1,6 +1,12 @@
 # 使用官方的Python基础镜像
 FROM python:3.10-slim
 
+# 安装时区依赖
+RUN apt-get update && apt-get install -y tzdata
+
+# 设置东八区时区
+ENV TZ=Asia/Shanghai
+
 # 设置工作目录
 WORKDIR /app
 
