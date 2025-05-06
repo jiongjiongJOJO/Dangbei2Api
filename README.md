@@ -10,16 +10,28 @@
 
 ## 支持模型
 
-| 模型名                | 支持深度思考 | 支持联网搜索 | 描述                        |
-|--------------------|--------|--------|---------------------------|
-| deepseek-r1        | ✅      | ❌      | 671b满血版r1模型               |
-| deepseek-r1-search | ✅      | ✅      | 包含联网搜索功能的671b满血r1模型       |
-| deepseek-v3        | ❌      | ❌      |                           |
-| deepseek-v3-search | ❌      | ✅      |                           |
-| doubao             | ❌      | ❌      | 该模型被DB增加了系统提示词，暂不清楚具体什么模型 |
-| doubao-search      | ❌      | ✅      |                           |
-| qwen               | ❌      | ❌      | 该模型被DB增加了系统提示词，暂不清楚具体什么模型 |
-| qwen-search        | ❌      | ✅      |                           |
+注：所有模型名称后方增加 `-search` 的模型均为同模型的支持联网搜索的版本。
+
+| 模型名                        | 支持深度思考 | 支持联网搜索 | 描述                                     |
+|----------------------------|--------|--------|----------------------------------------|
+| deepseek-r1                | ✅      | ❌      | 671b满血版r1模型                            |
+| deepseek-r1-search         | ✅      | ✅      | 包含联网搜索功能的671b满血r1模型                    |
+| deepseek-v3                | ❌      | ❌      |                                        |
+| deepseek-v3-search         | ❌      | ✅      |                                        |
+| doubao                     | ❌      | ❌      | 该模型被DB增加了系统提示词，doubao-1.5-pro-32k      |
+| doubao-search              | ❌      | ✅      |                                        |
+| doubao-thinking            | ✅      | ❌      | 该模型被DB增加了系统提示词，doubao-1.5-thinking-pro |
+| doubao-thinking-search     | ✅      | ✅      |                                        |
+| qwen-plus                  | ❌      | ❌      | 该模型被DB增加了系统提示词，qwen-plus-32k           |
+| qwen-plus-search           | ❌      | ✅      |                                        |
+| qwen-long                  | ❌      | ❌      | 该模型被DB增加了系统提示词，qwen-long               |
+| qwen-long-search           | ❌      | ✅      |                                        |
+| qwq-plus                   | ✅      | ❌      | 该模型被DB增加了系统提示词，暂不清楚具体什么模型              |
+| qwq-plus-search            | ✅      | ✅      |                                        |
+| moonshot-v1-32k            | ❌      | ❌      | 该模型被DB增加了系统提示词，kimi moonshot-v1-32k    |
+| moonshot-v1-32k-search     | ❌      | ✅      |                                        |
+| ernie-4.5-turbo-32k        | ❌      | ❌      | 该模型被DB增加了系统提示词，文心 ernie-4.5-turbo-32k  |
+| ernie-4.5-turbo-32k-search | ❌      | ✅      |                                        |
 
 ## 部署说明
 
@@ -44,47 +56,3 @@ LOG_LEVEL=DEBUG
 ```bash
 docker run -d -p 8000:8000 -e API_KEY=sk-DangBei666 -e MAX_CHARS=99999  -eENABLE_CORS=True -e LOG_LEVEL=INFO --name dangbei2api jiongjiong/dangbei2api:latest
 ```
-
-# 更新历史
-
-<details>
-<summary> ver.20250228</summary>
-
----
-
-- **优化显示效果**
-    - 修改新闻等`card内容`展示方式为表格
-- **优化上下文管理**
-    - 支持`主动截断`上下文
-    - 仅处理user和assistant的内容，保留其他内容，可通过变量配置
-
----
-
-</details>
-
----
-
-<details>
-<summary> ver.20250227</summary>
-
----
-
-- **优化联网搜索**
-    - deepseek-r1 模型：`deepseek-r1`
-    - deepseek-r1 模型，支持搜索功能：`deepseek-r1-search`
-    - deepseek-v3 模型：`deepseek-v3`
-    - deepseek-v3 模型，支持搜索功能：`deepseek-v3-search`
-- **新增功能**
-    - 添加`CORS配置`开关
-- **功能调整**
-    - 移除主动发送`清除上下文`内容的功能
-    - 更新`requirements`文件
-- **功能调整**
-    - 修复`上下文关联失败`问题
-    - 修复`签名验证失败`问题
-    - 修复`新闻或带 URL 的内容无法解析`问题
-    - 将日志长内容换行输出`修改为单行输出`
-
----
-
-</details>

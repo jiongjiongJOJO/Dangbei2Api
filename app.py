@@ -69,20 +69,48 @@ ua = UserAgent()  # 初始化 fake-useragent 的 UserAgent 对象
 
 # 支持的模型和对应的 userAction 映射
 supported_models = [
-    "deepseek-r1", "deepseek-r1-search",
-    "deepseek-v3", "deepseek-v3-search",
-    "doubao", "doubao-search",  # noqa
-    "qwen", "qwen-search",
+    "deepseek-r1", "deepseek-r1-search",  # deepseek-r1-671b
+    "deepseek-v3", "deepseek-v3-search",  # deepseek-v3
+    "doubao", "doubao-search",  # doubao-1.5-pro-32k # noqa
+    "doubao-thinking", "doubao-thinking-search",  # doubao-1.5-thinking-pro
+    "qwen-plus", "qwen-plus-search",  # qwen-plus-32k
+    "qwq-plus", "qwq-plus-search",  # qwen-qwq-32k
+    "qwen-long", "qwen-long-search",  # qwen-long
+    "moonshot-v1-32k", "moonshot-v1-32k-search",  # kimi
+    "ernie-4.5-turbo-32k", "ernie-4.5-turbo-32k-search"  # ernie-4.5-turbo-32k
 ]
+
 model_to_user_action = {
+    # deepseek-r1-671b
     "deepseek-r1": {'model': 'deepseek', 'user_action': ["deep"]},
     "deepseek-r1-search": {'model': 'deepseek', 'user_action': ["deep", "online"]},
+    # deepseek-v3
     "deepseek-v3": {'model': 'deepseek', 'user_action': []},
     "deepseek-v3-search": {'model': 'deepseek', 'user_action': ["online"]},
+    # doubao-1.5-pro-32k
     'doubao': {'model': 'doubao', 'user_action': []},  # noqa
     'doubao-search': {'model': 'doubao', 'user_action': ["online"]},  # noqa
+    # doubao-1.5-thinking-pro
+    'doubao-thinking': {'model': 'doubao-thinking', 'user_action': ['deep']},
+    'doubao-thinking-search': {'model': 'doubao-thinking', 'user_action': ['deep', "online"]},
+    # qwen
     'qwen': {'model': 'qwen', 'user_action': []},
     'qwen-search': {'model': 'qwen', 'user_action': ["online"]},
+    # qwen-plus-32k
+    'qwen-plus': {'model': 'qwen-plus', 'user_action': []},
+    'qwen-plus-search': {'model': 'qwen-plus', 'user_action': ["online"]},
+    # qwen-qwq-32k
+    'qwq-plus': {'model': 'qwq-plus', 'user_action': ['deep']},
+    'qwq-plus-search': {'model': 'qwq-plus', 'user_action': ['deep', 'search']},
+    # qwen-long
+    'qwen-long': {'model': 'qwen-long', 'user_action': []},
+    'qwen-long-search': {'model': 'qwen-long', 'user_action': ["online"]},
+    # kimi
+    'moonshot-v1-32k': {'model': 'moonshot', 'user_action': []},
+    'moonshot-v1-32k-search': {'model': 'moonshot', 'user_action': ["online"]},
+    # ernie-4.5-turbo-32k
+    'ernie-4.5-turbo-32k': {'model': 'ernie-4.5-turbo', 'user_action': []},
+    'ernie-4.5-turbo-32k-search': {'model': 'ernie-4.5-turbo', 'user_action': ["online"]},
 }
 
 # 用于存储 device_id 对应的 User-Agent
