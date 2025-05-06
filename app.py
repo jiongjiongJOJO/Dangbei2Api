@@ -8,6 +8,7 @@ import uvicorn
 import hashlib
 import secrets
 import logging
+from version import VERSION
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from fake_useragent import UserAgent
@@ -501,4 +502,5 @@ async def list_models(_: None = Depends(check_authorization)):
 
 
 if __name__ == "__main__":
+    logger.info('当前程序版本为：{}'.format(VERSION))
     uvicorn.run(app, host="0.0.0.0", port=8000)
